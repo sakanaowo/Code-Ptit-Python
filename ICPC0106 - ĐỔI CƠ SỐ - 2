@@ -1,0 +1,21 @@
+from math import *
+
+
+def dcs(n, base):
+    dec=int(n,2)
+    if base != 16:
+        res = ""
+        while dec > 0:
+            r = dec % base
+            res = str(r) + res
+            dec //= base
+        return res
+    else:
+        hex_n = hex(dec)
+        return str(hex_n)[2:].upper()
+
+
+for case in range(int(input())):
+    base = int(input())
+    n = input()
+    print(dcs(n, base))
