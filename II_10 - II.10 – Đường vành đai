@@ -17,18 +17,6 @@ for i in range(2, int(isqrt(MAX)) + 1):
             prime[j] = False
 
 
-# def find(n, k):
-#     if k == 1: return 1
-#     res = 2 ** (n - 1)
-#     if k == res:
-#         return n
-#     elif k < res:
-#         return find(n - 1, k)
-#     else:
-#         return find(n - 1, k - res)
-#
-
-
 def main():
     m = int(input())
     v = int(input())
