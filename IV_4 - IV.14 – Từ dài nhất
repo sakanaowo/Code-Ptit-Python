@@ -1,0 +1,25 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import *
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    row = input().split()
+    row.sort(key=lambda x: -len(x))
+    print(row[0], len(row[0]))
+
+if __name__ == '__main__':
+    main()
