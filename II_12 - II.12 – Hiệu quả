@@ -1,0 +1,29 @@
+from collections import *
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    a, b, c = map(int, input().split())
+    x, y, z = map(int, input().split())
+    first = a * 3600 + b * 60 + c
+    last = x * 3600 + y * 60 + z
+    print(last - first if last >= first else last - first + 24 * 3600)
+
+
+if __name__ == '__main__':
+    main()
