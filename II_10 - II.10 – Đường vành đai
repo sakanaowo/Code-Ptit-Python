@@ -1,0 +1,42 @@
+from collections import *
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+# def find(n, k):
+#     if k == 1: return 1
+#     res = 2 ** (n - 1)
+#     if k == res:
+#         return n
+#     elif k < res:
+#         return find(n - 1, k)
+#     else:
+#         return find(n - 1, k - res)
+#
+
+
+def main():
+    m = int(input())
+    v = int(input())
+    t = int(input())
+    d = input()
+
+    print((v * t) % m if d == 'C' else (m - (v * t) % m))
+
+
+if __name__ == '__main__':
+    main()
