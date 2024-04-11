@@ -1,0 +1,47 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+def line(points):
+    n = len(points)
+    if n <= 2: return True
+    x1, y1 = points[0]
+    x2, y2 = points[1]
+    dx = x2 - x1
+    dy = y2 - y1
+    for i in range(2, n):
+        x, y = points[i]
+        tmp = dx * (y - y1) - dy * (x - x1)
+        if tmp != 0: return False
+    return True
+
+
+def main():
+    n = int(input())
+    points = [list(map(int, input().split())) for _ in range(n)]
+
+    if line(points):
+        result = "No"
+    else:
+        result = "Yes\n"
+        result += " ".join(str(i + 1) for i in range(3))
+
+    print(result)
+
+
+if __name__ == '__main__':
+    # for _ in range(int(input())):
+    main()
