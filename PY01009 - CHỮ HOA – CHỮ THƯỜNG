@@ -1,0 +1,32 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    a, b = 0, 0
+    s = input()
+    for i in s:
+        if i.isupper():
+            a += 1
+        else:
+            b += 1
+    print(s.upper() if a >= b else s.lower())
+
+
+if __name__ == '__main__':
+    # for _ in range(int(input())):
+    main()
