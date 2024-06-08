@@ -1,0 +1,7 @@
+s=input()
+i=0
+for x in range(len(s)):
+    if s[x]=='4' or s[x]=='7':
+        i+=1
+
+print("YES" if i==4 or i==7 else "NO")
