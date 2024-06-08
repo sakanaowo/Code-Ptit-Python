@@ -1,0 +1,6 @@
+
+for case in range(int(input())):
+    n = input()
+    d = n[0] + n[1]
+    c = n[len(n) - 2] + n[len(n) - 1]
+    print("YES" if c == d else "NO")
