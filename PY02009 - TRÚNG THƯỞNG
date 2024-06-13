@@ -1,0 +1,53 @@
+from collections import *
+from functools import *
+from heapq import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import *
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+
+# def find(n, k):
+#     if k == 1: return 1
+#     res = 2 ** (n - 1)
+#     if k == res:
+#         return n
+#     elif k < res:
+#         return find(n - 1, k)
+#     else:
+#         return find(n - 1, k - res)
+
+
+def main():
+    dic = {}
+    n = int(input())
+    for _ in range(n):
+        x = int(input())
+        dic[x] = dic.get(x, 0) + 1
+    max_f = 0
+    for i in dic:
+        if dic[i] > max_f:
+            max_f = dic[i]
+            min_v = i
+        elif dic[i] == max_f:
+            min_v = min(min_v, i)
+    print(min_v)
+
+
+if __name__ == '__main__':
+    for case in range(int(input())):
+        main()
