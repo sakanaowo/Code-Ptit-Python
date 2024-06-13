@@ -1,0 +1,43 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+vector = []
+
+
+def Try(x, a, b, c, n):
+    if len(x) <= n:
+        if a and b and c and a <= b <= c: vector.append(x)
+        if len(x) == n: return
+
+    Try(x + 'A', a + 1, b, c, n)
+    Try(x + 'B', a, b + 1, c, n)
+    Try(x + 'C', a, b, c + 1, n)
+
+
+def main():
+    n = int(input())
+    Try("", 0, 0, 0, n)
+    for i in sorted(vector, key=lambda x: len(x)): print(i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
