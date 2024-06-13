@@ -1,0 +1,32 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from itertools import *
+
+MAX = 100000
+mod = int(1e9 + 7)
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    s = input()
+    k = 1
+    for i in range(1, len(s)):
+        if s[i] != s[i - 1]:
+            print(k, s[i - 1], sep='', end='')
+            k = 1
+        else:
+            k += 1
+    print(k, s[len(s) - 1], sep='')
+
+
+if __name__ == '__main__':
+    for _ in range(int(input())):
+        main()
