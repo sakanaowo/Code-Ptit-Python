@@ -1,0 +1,41 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from itertools import *
+
+MAX = 100000
+mod = int(1e9 + 7)
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def check(n):
+    for i in n:
+        if int(i) & 1: return False
+    return True
+
+
+def main():
+    num, vec = 2, []
+    while num <= 888:
+        if check(str(num)):
+            tmp = str(num)
+            vec.append(int(tmp + tmp[::-1]))
+        num += 2
+    for _ in range(int(input())):
+        n = int(input())
+        for i in vec:
+            if i >= n: continue
+            print(i, end=' ')
+        print()
+
+
+if __name__ == '__main__':
+    # for _ in range(int(input())):
+    main()
