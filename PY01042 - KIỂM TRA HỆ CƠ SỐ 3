@@ -1,0 +1,12 @@
+from math import *
+
+
+def solve(n):
+    for i in range(len(n)):
+        if n[i] != '1' and n[i] != '2' and n[i] != '0': return 'NO'
+    return 'YES'
+
+
+for case in range(int(input())):
+    n = input()
+    print((solve(n)))
