@@ -1,0 +1,4 @@
+s=input()
+ss=s.split()
+for case in range(len(ss)):
+    print(ss[case])
