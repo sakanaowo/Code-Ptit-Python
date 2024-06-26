@@ -1,0 +1,35 @@
+import functools
+from math import *
+from itertools import accumulate
+from decimal import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+
+def check(s):
+    if len(s) < 3: return False
+    if s[1] <= s[0] or s[-2] <= s[-1]: return False
+    p1, p2 = 1, len(s) - 2
+    while s[p1] > s[p1 - 1] and p1 < len(s): p1 += 1
+    while s[p2] > s[p2 + 1] and p2 >= 0: p2 -= 1
+    return True if (p1 == p2 + 2) else False
+
+
+def main():
+    n = input()
+    print('YES' if check(n) else 'NO')
+
+
+if __name__ == '__main__':
+    for case in range(int(input())):
+        main()
