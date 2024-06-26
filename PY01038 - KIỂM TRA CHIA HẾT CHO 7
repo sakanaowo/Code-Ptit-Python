@@ -1,0 +1,13 @@
+from math import *
+
+
+def solve(n):
+    for i in range(1000):
+        if n % 7 == 0: return n
+        n += int(str(n)[::-1])
+    return -1
+
+
+for case in range(int(input())):
+    n = int(input())
+    print((solve(n)))
