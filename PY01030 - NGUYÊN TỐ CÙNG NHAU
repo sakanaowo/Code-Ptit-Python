@@ -1,0 +1,43 @@
+import functools
+from math import *
+from itertools import accumulate
+from decimal import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+data = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+
+def base_converter(n, base):
+    res = ''
+    while n > 0:
+        x = n % base
+        res = data[x] + res
+        n //= base
+    return res
+
+
+def custom(element):
+    return element[1]
+
+
+def main():
+    n, k = [int(i) for i in input().split()]
+    a, b, cnt = 10 ** (k - 1), 10 ** k, 0
+    for i in range(a, b):
+        if gcd(i, n) == 1:
+            print(i, end=' ')
+            cnt += 1
+        if cnt == 10:
+            print()
+            cnt = 0
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
