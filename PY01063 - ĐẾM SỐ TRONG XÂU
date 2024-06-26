@@ -1,0 +1,40 @@
+import functools
+from functools import *
+from math import *
+import sys
+import re
+from decimal import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+visited = [False] * MAX
+ar = [0] * MAX
+
+
+def dewy(i, n, k, vector):
+    for j in range(ar[i - 1] + 1, n - k + i + 1):
+        ar[i] = j
+        if i == k:
+            print([vector[ar[x] - 1] for x in range(1, k + 1)])
+        else:
+            dewy(i + 1, n, k, vector)
+
+
+def main():
+    n, m = input(), input()
+    print(n.count(m))
+
+
+if __name__ == '__main__':
+    for case in range(int(input())):
+        main()
