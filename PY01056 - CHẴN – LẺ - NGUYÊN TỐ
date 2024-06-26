@@ -1,0 +1,27 @@
+from math import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def Try(n):
+    for i in range(len(n)):
+        if (i % 2 == 0 and not int(n[i]) % 2 == 0) or (i % 2 == 1 and not int(n[i]) % 2 == 1): return 'NO'
+    s = sum(int(i) for i in n)
+    if not prime[s]: return 'NO'
+    return 'YES'
+
+
+def main():
+    for case in range(int(input())):
+        n = input()
+        print(Try(n))
+
+
+if __name__ == '__main__':
+    main()
