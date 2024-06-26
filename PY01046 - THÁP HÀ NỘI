@@ -1,0 +1,13 @@
+from math import *
+
+
+def dewy(n, a, b, c):
+    if n == 1:
+        print(f"{a} -> {c}")
+        return
+    dewy(n - 1, a, c, b)
+    dewy(1, a, b, c)
+    dewy(n - 1, b, a, c)
+
+n = int(input())
+dewy(n, 'A', 'B', 'C')
