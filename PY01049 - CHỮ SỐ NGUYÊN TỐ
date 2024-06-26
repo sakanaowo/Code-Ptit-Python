@@ -1,0 +1,29 @@
+from math import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def Try(n):
+    cp, ncp = 0, 0
+    for i in n:
+        if prime[int(i)]:
+            cp += 1
+        else:
+            ncp += 1
+    return prime[len(n)] and (cp > ncp)
+
+
+def main():
+    for case in range(int(input())):
+        n = input()
+        print('YES' if Try(n) else 'NO')
+
+
+if __name__ == '__main__':
+    main()
