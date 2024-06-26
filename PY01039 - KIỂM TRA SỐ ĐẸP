@@ -1,0 +1,14 @@
+from math import *
+
+
+def check(n):
+    for i in range(len(n)-1):
+        if n[i] == n[i + 1]: return False
+    for i in range(2, len(n)):
+        if n[i] != n[i - 2]: return False
+    return True
+
+
+for case in range(int(input())):
+    n = input()
+    print('YES' if check(n) else 'NO')
