@@ -1,0 +1,26 @@
+import functools
+from functools import *
+from math import *
+from decimal import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+
+def main():
+    n = input()
+    print('YES' if prime[int(n[-4:])] else 'NO')
+
+
+if __name__ == '__main__':
+    for case in range(int(input())):
+        main()
