@@ -1,0 +1,35 @@
+import functools
+from functools import *
+from math import *
+import sys
+import re
+from decimal import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+def check(n):
+    if not n.isdigit():
+        return True
+    else:
+        if int(n) <= 2147483647 and int(n) >= -2147483648: return False
+    return True
+
+
+def main():
+    res = []
+    for i in file:
+        for j in i.split():
+            if check(j): res.append(j)
+    for i in sorted(res):
+        print(i, end=' ')
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
