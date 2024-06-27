@@ -1,0 +1,37 @@
+from collections import *
+from functools import *
+from heapq import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import *
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+def check(n):
+    if n[-1] == 2: return False
+    for i in [2, 3, 5, 7]:
+        if n.count(i) == 0: return False
+    return True
+
+
+def main():
+    x = [2, 3, 5, 7]
+    n = int(input())
+    vector = []
+    for i in range(4, n + 1):
+        vector += [i for i in list(product(x, repeat=i)) if check(i)]
+    for i in vector: print(''.join(str(j) for j in i))
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
