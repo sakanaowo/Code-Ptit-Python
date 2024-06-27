@@ -1,0 +1,18 @@
+from math import *
+
+
+def check(s):
+    ss = s[::-1]
+    for i in range(len(s) - 1):
+        if abs(ord(s[i]) - ord(s[i + 1])) != abs(ord(ss[i]) - ord(ss[i + 1])):
+            return 'NO'
+    return 'YES'
+
+
+def main():
+    for case in range(int(input())):
+        s = input()
+        print(check(s))
+
+if __name__ == '__main__':
+    main()
