@@ -1,0 +1,53 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+category = []
+
+
+class Data:
+    def __init__(self, id):
+        self.id = 'P{:03d}'.format(id)
+        self.cat = category[int(input()[-3:]) - 1]
+        self.date = input()
+        self.d = int(self.date[:2:])
+        self.m = int(self.date[3:5:])
+        self.y = int(self.date[6::])
+        self.meh = input()
+        self.episode = int(input())
+
+    def __str__(self):
+        return f"{self.id} {self.cat} {self.date} {self.meh} {self.episode}"
+
+
+def main():
+    vector = []
+    n, m = map(int, input().split())
+    for _ in range(n):
+        category.append(input())
+    for _ in range(m):
+        tmp = Data(_ + 1)
+        vector.append(tmp)
+    for i in sorted(vector, key=lambda x: (x.y, x.m, x.d, x.meh, -x.episode)):
+        print(i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
