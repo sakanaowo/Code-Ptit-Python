@@ -1,0 +1,37 @@
+import functools
+from math import *
+from itertools import permutations
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+class Bill:
+    def __init__(self):
+        self.id = input()
+        self.name = input()
+        self.quantity = int(input())
+        self.price = int(input())
+        self.discount = int(input())
+        self.total = self.price * self.quantity - self.discount
+
+    def __str__(self):
+        return f"{self.id} {self.name} {self.quantity} {self.price} {self.discount} {self.total}"
+
+
+def main():
+    vector = []
+    for _ in range(int(input())):
+        tmp = Bill()
+        vector.append(tmp)
+    for i in sorted(vector, key=lambda x: -x.total):
+        print(i)
+
+
+if __name__ == '__main__':
+    main()
