@@ -1,0 +1,41 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from itertools import *
+
+MAX = 100000
+mod = int(1e9 + 7)
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+P = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+def main():
+    n = input()
+    mid = len(n) // 2
+    fhalf, shalf = n[:mid], n[mid:]
+    sum1 = sum([int(P.find(i)) for i in fhalf])
+    sum2 = sum([int(P.find(i)) for i in shalf])
+    a, b = '', ''
+    for i in fhalf:
+        index = (P.find(i) + sum1) % len(P)
+        a += (P[index])
+    for i in shalf:
+        index = (P.find(i) + sum2) % len(P)
+        b += (P[index])
+    for i in range(len(fhalf)):
+        index = (P.find(a[i]) + P.find(b[i])) % len(P)
+        print(P[index], end='')
+    print()
+
+
+if __name__ == '__main__':
+    for _ in range(int(input())):
+        main()
