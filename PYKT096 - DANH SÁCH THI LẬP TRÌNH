@@ -1,0 +1,44 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+team_list = []
+
+class Data:
+    def __init__(self, id):
+        self.id = 'C{:03d}'.format(id)
+        self.name = input()
+        team = input()
+        self.team = team_list[int(team[-2:]) - 1]
+
+    def __str__(self):
+        return f"{self.id} {self.name} {self.team}"
+
+
+def main():
+    vector = []
+    for case in range(int(input())):
+        x, y = input(), input()
+        team_list.append(x +' '+ y)
+    for i in range(int(input())):
+        x = Data(i + 1)
+        vector.append(x)
+    for x in sorted(vector, key=lambda i: i.name):
+        print(x)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
