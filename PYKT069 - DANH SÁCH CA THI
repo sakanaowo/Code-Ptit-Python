@@ -1,0 +1,51 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+file = open('CATHI.in', 'r')
+
+
+class Data:
+    def __init__(self, id):
+        self.id = 'C{:03d}'.format(id)
+        date = file.readline().strip().split('/')
+        self.date = '/'.join(date)
+        self.day, self.month, self.year = date[0], date[1], date[2]
+        time = file.readline().strip().split(':')
+        self.time = ':'.join(time)
+        self.hour, self.min = time[0], time[1]
+        self.room = file.readline().strip()
+
+    def __str__(self):
+        return f"{self.id} {self.date} {self.time} {self.room}"
+
+
+def main():
+    vector = []
+    for case in range(int(file.readline().strip())):
+        x = Data(case + 1)
+        vector.append(x)
+    for i in sorted(vector, key=lambda x: (x.year, x.month, x.day, x.hour, x.min, x.id)):
+        print(i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
