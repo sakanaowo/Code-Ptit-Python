@@ -1,0 +1,42 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+adj = {}
+visited = [False] * MAX
+
+
+def dfs(u):
+    visited[u] = True
+    for i in adj[u]:
+        if not visited[i]:
+            dfs(i)
+
+
+def main():
+    n, m, p = map(int, input().split())
+    for i in range(n): adj[i + 1] = []
+    for i in range(m):
+        x, y = map(int, input().split())
+        adj[x].append(y)
+        adj[y].append(x)
+    dfs(p)
+    for i in range(n):
+        if not visited[i + 1]: print(i+1)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
