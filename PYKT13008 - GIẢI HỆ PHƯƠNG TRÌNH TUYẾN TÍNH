@@ -1,0 +1,85 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import *
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+data = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+
+def identity_matrix(n):
+    return [[1 if i == j else 0 for j in range(n)] for i in range(n)]
+
+
+def inverse_matrix(matrix):
+    n = len(matrix)
+
+    # Khởi tạo ma trận đơn vị
+    identity = identity_matrix(n)
+
+    # Sao chép ma trận đầu vào để không ảnh hưởng trực tiếp đến nó
+    A = [row[:] for row in matrix]
+    I = [row[:] for row in identity]
+
+    # Áp dụng phương pháp Gauss-Jordan
+    for i in range(n):
+        # Tìm hàng có phần tử không bằng 0 ở cột i
+        if A[i][i] == 0:
+            for j in range(i + 1, n):
+                if A[j][i] != 0:
+                    A[i], A[j] = A[j], A[i]
+                    I[i], I[j] = I[j], I[i]
+                    break
+
+        # Chuyển đổi hàng i thành dạng thức 1
+        divisor = A[i][i]
+        if divisor == 0: return (False, I)
+        for j in range(n):
+            A[i][j] /= divisor
+            I[i][j] /= divisor
+
+        # Loại bỏ các phần tử khác 0 ở cột i
+        for k in range(n):
+            if k != i:
+                factor = A[k][i]
+                for j in range(n):
+                    A[k][j] -= factor * A[i][j]
+                    I[k][j] -= factor * I[i][j]
+
+    return (True, I)
+
+
+def mul(a, b):
+    n = len(a)
+    res = [[0] for _ in range(n)]
+    for i in range(len(a)):
+        for j in range(len(b)):
+            res[i][0] += a[i][j] * b[j]
+    return res
+
+
+if __name__ == '__main__':
+    for _ in range(int(input())):
+        # Sử dụng hàm inverse_matrix để tính ma trận nghịch đảo của ma trận A
+        n = int(input())
+        A = [list(map(int, input().split())) for _ in range(n)]
+        B = [int(i) for i in input().split()]
+        inverse_A = inverse_matrix(A)
+        if not inverse_A[0]:
+            print(-1)
+        else:
+            C = mul(inverse_A[1], B)
+            for row in C:
+                print(' '.join('{:.3f}'.format(val) for val in row), end=' ')
+            print()
