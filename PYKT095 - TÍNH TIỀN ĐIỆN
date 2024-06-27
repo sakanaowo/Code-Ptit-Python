@@ -1,0 +1,50 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+
+MAX = 100000
+
+norms = {
+    'A': 100,
+    'B': 500,
+    'C': 200
+}
+
+
+class Data:
+    def __init__(self, id):
+        self.id = 'KH{:02d}'.format(id)
+        self.name = ' '.join(i.capitalize() for i in input().split())
+        row = input().split()
+        enumber = int(row[2]) - int(row[1])
+        norm = norms[row[0]]
+        excess = 0
+        if enumber > norm:
+            excess = (enumber - norm) * 1000
+        within = enumber * 450 if enumber <= norm else norm * 450
+        vat = excess // 20
+        self.amount = within + vat + excess
+        self.excess = excess
+        self.within = within
+        self.vat = vat
+
+    def __str__(self):
+        return f"{self.id} {self.name} {self.within} {self.excess} {self.vat} {self.amount}"
+
+
+def main():
+    vector = []
+    for _ in range(int(input())):
+        x = Data(_ + 1)
+        vector.append(x)
+    for i in sorted(vector, key=lambda x: -x.amount):
+        print(i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
