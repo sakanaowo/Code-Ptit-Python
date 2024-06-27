@@ -1,0 +1,61 @@
+from collections import *
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def counter(paths):
+    c = 0
+    if not paths: return 0
+    for i in set(paths[0]):
+        tmp = 1
+        for row in paths[1:]:
+            if i in row:
+                tmp += 1
+        if tmp == len(paths):
+            c += 1
+    return c
+
+
+def dfs(u, v, visited, graph, paths, path):
+    visited[u] = True
+    path.append(u)
+    if u == v:
+        paths.append(path[1:-1])
+    else:
+        for i in graph[u]:
+            if not visited[i]:
+                dfs(i, v, visited, graph, paths, path)
+    path.pop()
+    visited[u] = False
+
+
+def main():
+    graph = defaultdict(list)
+    visited = [False] * MAX
+    path, paths = [], []
+    n, m, u, v = map(int, input().split())
+    for i in range(m):
+        x, y = map(int, input().split())
+        graph[x].append(y)
+    dfs(u, v, visited, graph, paths, path)
+    # for i in paths: print(i)
+    print(counter(paths))
+
+
+if __name__ == '__main__':
+    for _ in range(int(input())):
+        main()
