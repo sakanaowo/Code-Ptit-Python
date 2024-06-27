@@ -1,0 +1,61 @@
+from collections import *
+from functools import *
+from heapq import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import *
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+parent, sz = {}, {}
+
+
+def make_set(v):
+    parent[v] = v
+    sz[v] = 1
+
+
+def find_set(v):
+    if v == parent[v]: return v
+    p = find_set(parent[v])
+    parent[v] = p
+    return p
+
+
+def union_set(a, b):
+    a = find_set(a)
+    b = find_set(b)
+    if a != b:
+        if sz[a] < sz[b]:
+            parent[a] = b
+            sz[b] += sz[a]
+        else:
+            parent[b] = a
+            sz[a] += sz[b]
+
+
+def main():
+    global parent, sz
+    exist = set()
+    for _ in range(int(input())):
+        x, y, q = map(int, input().split())
+        if x not in exist: make_set(x);exist.add(x)
+        if y not in exist: make_set(y);exist.add(y)
+        if q == 1:
+            union_set(x, y)
+        else:
+            print(0 if find_set(x) != find_set(y) else 1)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
