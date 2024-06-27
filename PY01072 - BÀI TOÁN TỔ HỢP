@@ -1,0 +1,32 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+
+def main():
+    n, m = map(int, input().split())
+    ar = sorted(list(set([int(i) for i in input().split()])))
+    vector = combinations(ar, m)
+    for i in vector:
+        print(*i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
