@@ -1,0 +1,31 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+file = open('CONTACT.in', 'r')
+
+
+def main():
+    vector = {}
+    for row in file:
+        if row[-1] == '\n':
+            row = row[:-1]
+        vector[row.lower()] = 1
+    for x in sorted(vector.keys()): print(x)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
