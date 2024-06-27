@@ -1,0 +1,61 @@
+from collections import *
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def dfs(u, visited, graph):
+    visited[u] = True
+    for i in graph[u]:
+        if not visited[i]:
+            dfs(i, visited, graph)
+
+
+def input_graph(graph):
+    n, m = map(int, input().split())
+    for i in range(m):
+        x, y = map(int, input().split())
+        graph[x].append(y)
+        graph[y].append(x)
+
+
+def new_graph():
+    return defaultdict(list)
+
+
+def find_in(graph):
+    max_tmp, k = 1, 0
+    for i in graph:
+        visited = [False] * MAX
+        visited[i] = True
+        ic = 0
+        for j in graph:
+            if not visited[j]:
+                dfs(j, visited, graph)
+                ic += 1
+        if ic > max_tmp:
+            k = i
+            max_tmp = ic
+    return k
+
+
+def main():
+    graph = new_graph()
+    input_graph(graph)
+    print(find_in(graph))
+
+
+if __name__ == '__main__':
+    for _ in range(int(input())):
+        main()
