@@ -1,0 +1,32 @@
+from math import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    lst = []
+    for case in range(int(input())):
+        s = input()
+        n = ""
+        for i in s:
+            if i.isdigit():
+                n += i
+            else:
+                if n:
+                    lst.append(int(n))
+                    n = ""
+        if n:
+            lst.append(int(n))
+    lst = sorted(lst)
+    for i in lst:
+        print(i)
+
+
+if __name__ == '__main__':
+    main()
