@@ -1,0 +1,46 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+
+def main():
+    a, b = {}, {}
+    with open('DATA1.in', 'r') as file:
+        data1 = file.readlines()
+    file.close()
+    with open('DATA2.in', 'r') as file:
+        data2 = file.readlines()
+    file.close()
+    for i in data1:
+        for x in i.strip().split(): a[x.lower()] = a.get(x.lower(), 0) + 1
+
+    for i in data2:
+        for x in i.strip().split(): b[x.lower()] = b.get(x.lower(), 0) + 1
+    for i in sorted(a):
+        if i not in b: print(i, end=' ')
+    print()
+    for i in sorted(b):
+        if i not in a:
+            print(i, end=' ')
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
