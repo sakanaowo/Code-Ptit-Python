@@ -1,0 +1,32 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    n = int(input())
+    tmp = [int(i) for i in range(1, n + 1, 1)]
+    vector = list(permutations(tmp, n))
+    print(len(vector))
+
+    for i in reversed(vector):
+        for j in i:
+            print(j, end='')
+        print(end=' ')
+    print()
+
+
+if __name__ == '__main__':
+    for case in range(int(input())):
+        main()
