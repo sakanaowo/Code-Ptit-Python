@@ -1,0 +1,66 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+class Data:
+    def __init__(self, id):
+        self.id = 'GV{0:0>2}'.format(id)
+        self.name = input()
+        self.Adcode = input()
+        IT = float(input())
+        EX = float(input())
+        self.subject = self.Try1()
+        self.score = self.Try2(IT, EX)
+        self.result = self.Try3()
+
+    def Try1(self):
+        lst = {
+            'A': 'TOAN',
+            'B': 'LY',
+            'C': 'HOA'
+        }
+        return lst[self.Adcode[0]]
+
+    def Try2(self, a, b):
+        lst = {
+            '1': 2.0,
+            '2': 1.5,
+            '3': 1.0,
+            '4': 0.0
+        }
+        score = lst[self.Adcode[1]] + a * 2 + b
+        return '{:.1f}'.format(score)
+
+    def Try3(self):
+        if float(self.score) >= 18:
+            return 'TRUNG TUYEN'
+        else:
+            return 'LOAI'
+
+    def __str__(self):
+        return f"{self.id} {self.name} {self.subject} {self.score} {self.result}"
+
+
+def main():
+    vector = []
+    for case in range(int(input())):
+        a = Data(case + 1)
+        vector.append(a)
+    for i in sorted(vector, key=lambda x: (-float(x.score))):
+        print(i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
