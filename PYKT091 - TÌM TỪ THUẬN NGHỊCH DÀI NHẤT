@@ -1,0 +1,35 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+with open('VANBAN.in', 'r') as file:
+    content = file.read()
+
+
+def main():
+    vector = {}
+    for s in content.split():
+        if s == s[::-1]:
+            vector[s] = vector.get(s, 0) + 1
+    tmp = sorted(vector.items(), key=lambda x: (-len(x[0])))
+    max_l = len(tmp[0][0]) if tmp else 0
+    for item in vector.items():
+        if len(item[0]) == max_l:
+            print(item[0], item[1])
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
