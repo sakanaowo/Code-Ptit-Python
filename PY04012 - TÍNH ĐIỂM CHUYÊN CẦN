@@ -1,0 +1,55 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+
+def calc(n):
+    total = 10
+    for i in n:
+        if i == 'v':
+            total -= 2
+        elif i == 'm':
+            total -= 1
+    if total < 0:
+        return 0
+    else:
+        return total
+
+
+def main():
+    case = int(input())
+    data, vector = {}, []
+    for i in range(case):
+        id, name, clas = input(), input(), input()
+        tmp = [id, name, clas]
+        data[id] = int(i)
+        vector.append(tmp)
+    for _ in range(case):
+        n, m = input().split()
+        score = calc(m)
+        if score == 0:
+            vector[data[n]].append(str(score) + " KDDK")
+        else:
+            vector[data[n]].append(str(score))
+    for i in vector:
+        print(" ".join(map(str,i)))
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
