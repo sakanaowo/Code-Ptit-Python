@@ -1,0 +1,33 @@
+from math import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def dewy(n, k, sum, s):
+    for i in range(k, 0, -1):
+        if sum == n:
+            s = s[:len(s) - 1]
+            arr.append("(" + s + ")")
+            return
+        elif sum < n:
+            dewy(n, i, sum + i, s + str(i) + " ")
+
+
+def main():
+    for case in range(int(input())):
+        n = int(input())
+        arr.clear()
+        dewy(n, n, 0, "")
+        print(len(arr))
+        for i in arr: print(i, end=' ')
+        print()
+
+
+if __name__ == '__main__':
+    main()
