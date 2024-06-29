@@ -1,0 +1,45 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+sub = ['TOAN', 'LY', 'HOA']
+add = [2.0, 1.5, 1, 0]
+
+
+class Data:
+    def __init__(self, ten, donVi, thoiGian):
+        a = [i[0] for i in ten.split()]
+        b = [i[0] for i in donVi.split()]
+        self.id = ''.join(b) + ''.join(a)
+        self.ten = ten
+        self.donVi = donVi
+        c = thoiGian.split(':')
+        self.vanToc = 120 / (int(c[0]) - 6 + int(c[1]) / 60)
+
+    def __str__(self):
+        return f"{self.id} {self.ten} {self.donVi} {round(self.vanToc)} Km/h"
+
+
+def main():
+    vector = []
+    for case in range(int(input())):
+        a = Data(input(), input(), input())
+        vector.append(a)
+    for i in sorted(vector, key=lambda x: (-x.vanToc)):
+        print(i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
