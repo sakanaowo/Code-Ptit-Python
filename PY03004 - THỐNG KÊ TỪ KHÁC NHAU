@@ -1,0 +1,29 @@
+import functools
+import re
+from math import *
+from itertools import permutations
+from re import *
+
+MAX = 1000000
+prime = [True] * MAX
+prime[1] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    vector = {}
+    for case in range(int(input())):
+        s = input().strip().lower()
+        words = re.findall(r"\b\w+\b", s)
+        for i in words:
+            vector[i] = vector.get(i, 0) + 1
+    for x, y in sorted(vector.items(), key=lambda a: (-a[1], a[0])):
+        print(x, y)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
