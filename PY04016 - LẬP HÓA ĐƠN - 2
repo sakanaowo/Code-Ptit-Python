@@ -1,0 +1,61 @@
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+Fibo = [0] * 93
+Fibo[1] = Fibo[2] = 1
+for i in range(3, 93):
+    Fibo[i] = Fibo[i - 1] + Fibo[i - 2]
+
+floors = {
+    1: 25,
+    2: 34,
+    3: 50,
+    4: 80
+}
+
+
+class Data:
+    def __init__(self, id):
+        self.id = 'KH{:02d}'.format(id)
+        self.name = input()
+        self.room = input()
+        date1 = input().strip()
+        date2 = input().strip()
+        self.date = self.calc(date1, date2)
+        incure = int(input())
+        self.total = self.date * floors[int(self.room[0])] + incure
+
+    def calc(self, date1, date2):
+        d1 = datetime.strptime(date1, "%d/%m/%Y")
+        d2 = datetime.strptime(date2, "%d/%m/%Y")
+        return (d2 - d1).days + 1 if d2 > d1 else 1
+
+    def __str__(self):
+        return f"{self.id} {self.name} {self.room} {self.date} {self.total}"
+
+
+def main():
+    vector = []
+    for case in range(int(input())):
+        x = Data(case + 1)
+        vector.append(x)
+    for i in sorted(vector, key=lambda x: -x.total):
+        print(i)
+
+
+if __name__ == '__main__':
+    # for case in range(int(input())):
+    main()
