@@ -1,0 +1,36 @@
+from collections import *
+import functools
+from functools import *
+from math import *
+import sys
+from decimal import *
+from re import *
+from itertools import combinations
+from datetime import *
+
+MAX = 100000
+prime = [True] * MAX
+prime[1] = prime[0] = False
+for i in range(2, int(isqrt(MAX)) + 1):
+    if prime[i]:
+        for j in range(i * i, MAX, i):
+            prime[j] = False
+
+
+def main():
+    vector = {}
+    n, m = map(int, input().split())
+    for _ in range(n):
+        row = input().strip().lower()
+        words = findall(r"\b\w+\b", row)
+        for i in words:
+            vector[i] = vector.get(i, 0) + 1
+
+    vector = sorted(vector.items(), key=lambda x: (-x[1], x[0]))
+    for i in vector:
+        if i[1] >= m: print(i[0], i[1])
+
+
+if __name__ == '__main__':
+    # for _ in range(int(input())):
+    main()
